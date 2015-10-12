@@ -1,0 +1,14 @@
+{
+  "name": "jet-api",
+  "version": "0.0.1",
+  "main": "./jet-api.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest-cli": "^0.5.10"
+  },
+  "dependencies": {
+    "dotenv": "^1.2.0"
+  }
+}

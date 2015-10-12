@@ -1,0 +1,6 @@
+module.exports = {
+    URL: {
+        ROOT: "merchant-api.jet.com",
+        TOKEN: "/api/Token"
+    }
+};

@@ -1,0 +1,12 @@
+####Dev Setup:
+
+Create a .env file in the root directory. The contents should be as follows. You can get the `API_USER` and `API_SECRET`
+values from www.partner.jet.com:
+
+    API_USER=your_api_user_key
+    API_SECRET=your_api_secret
+
+####Authenticating:
+
+    var JetApi = require("jet-api");
+    var JetConnection = JetApi.connect();
