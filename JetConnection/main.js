@@ -10,6 +10,7 @@ var JetConnection = function(apiUser, apiSecret){
     this.errors = null;
 
     var theJetConnection = this;
+
     ApiFacade.Authentication.authenticate(apiUser, apiSecret,
         function(data) {
             theJetConnection.token = data.id_token;
@@ -21,6 +22,16 @@ var JetConnection = function(apiUser, apiSecret){
             theJetConnection.errors = errors;
         }
     );
+};
+
+JetConnection.prototype.listProducts = function() {
+    ApiFacade.Products.list(this.token,
+        function(data) {
+            console.log(data);
+        },
+        function(errors) {
+            console.log(errors);
+        })
 };
 
 
