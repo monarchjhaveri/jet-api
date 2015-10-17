@@ -1,17 +1,35 @@
 var ApiFacade = require ("../ApiFacade");
 
-function JetConnection(user, pass, token, token_type, expires_on, errors) {
+/**
+ *
+ * @param {!String} user
+ * @param {!String} pass
+ * @param {!String} token
+ * @param {!String} token_type
+ * @param {!Date} expires_on
+ * @param {!ApiFacade} apiFacade
+ * @constructor
+ */
+function JetConnection(user, pass, token, token_type, expires_on, apiFacade) {
     this.user = user;
     this.pass = pass;
     this.token = token;
     this.token_type = token_type;
     this.expires_on = expires_on;
-    this.errors = errors;
+    this.apiFacade = apiFacade;
 }
 
-JetConnection.connect = function(apiUser, apiSecret){
+/**
+ *
+ * @param {!String} apiUser
+ * @param {!String} apiSecret
+ * @param {!ApiFacade} apiFacade
+ * @returns {Promise}
+ */
+JetConnection.connect = function(apiUser, apiSecret, apiFacade){
+    var apiFacade = new ApiFacade();
     return new Promise(function(resolve, reject) {
-        ApiFacade.Authentication.authenticate(apiUser, apiSecret)
+        apiFacade.Authentication.authenticate(apiUser, apiSecret)
             .then(
             function(data) {
                 resolve(
@@ -20,7 +38,8 @@ JetConnection.connect = function(apiUser, apiSecret){
                         apiSecret,
                         data.response.id_token,
                         data.response.token_type,
-                        new Date(data.response.expires_on)
+                        Date(data.response.expires_on),
+                        apiFacade
                     )
                 );
             },
@@ -31,8 +50,9 @@ JetConnection.connect = function(apiUser, apiSecret){
 };
 
 JetConnection.prototype.listProducts = function() {
+    var apiFacade = this.apiFacade;
     return new Promise(function(resolve, reject) {
-        ApiFacade.Products.list(
+        apiFacade.Products.list(
             this.token,
             function(data) {
                 resolve(data.response);
@@ -44,8 +64,9 @@ JetConnection.prototype.listProducts = function() {
 };
 
 JetConnection.prototype.createProducts = function(product, sku) {
+    var apiFacade = this.apiFacade;
     return new Promise(function(resolve, reject) {
-        ApiFacade.Products.create(product, sku, this.token,
+        apiFacade.Products.create(product, sku, this.token,
             function(data) {
                 resolve(data.response);
             },
