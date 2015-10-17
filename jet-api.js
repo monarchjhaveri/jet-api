@@ -1,5 +1,6 @@
 require('dotenv').load();
 var JetConnection = require("./JetConnection");
+var ApiFacade = require("./ApiFacade");
 
 var JetApi = {};
 
@@ -8,10 +9,10 @@ var JetApi = {};
  *
  * @param {!String} apiUser
  * @param {!String} apiSecret
- * @returns {JetConnection}
+ * @returns {Promise}
  */
 JetApi.connect = function connect(apiUser, apiSecret) {
-    return JetConnection.connect(apiUser, apiSecret);
+    return JetConnection.connect(apiUser, apiSecret, new ApiFacade());
 };
 
 module.exports = JetApi;

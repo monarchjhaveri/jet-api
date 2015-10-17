@@ -1,11 +1,11 @@
 /**
  *
- * @param {!String|!Object} parsedResponse
+ * @param {!String|!Object} data
  * @constructor
  */
-function Success(parsedResponse) {
+function Success(data) {
     this.type = "Success";
-    this.response = parsedResponse;
+    this.data = data;
 }
 
 module.exports = Success;

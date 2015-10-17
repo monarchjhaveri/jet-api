@@ -27,53 +27,82 @@ function JetConnection(user, pass, token, token_type, expires_on, apiFacade) {
  * @returns {Promise}
  */
 JetConnection.connect = function(apiUser, apiSecret, apiFacade){
-    var apiFacade = new ApiFacade();
     return new Promise(function(resolve, reject) {
         apiFacade.Authentication.authenticate(apiUser, apiSecret)
             .then(
-            function(data) {
-                resolve(
-                    new JetConnection(
+                function(data) {
+                    var jc = new JetConnection(
                         apiUser,
                         apiSecret,
-                        data.response.id_token,
-                        data.response.token_type,
-                        Date(data.response.expires_on),
+                        data.data.id_token,
+                        data.data.token_type,
+                        Date(data.data.expires_on),
                         apiFacade
-                    )
-                );
-            },
-            reject
-        )
+                    );
+                    resolve(jc);
+                },
+                reject
+            )
+            .catch(function(error) {
+                console.log(error);
+            });
     });
 
 };
 
+/**
+ *
+ * @returns {Promise}
+ */
 JetConnection.prototype.listProducts = function() {
     var apiFacade = this.apiFacade;
+    var token = this.token;
     return new Promise(function(resolve, reject) {
-        apiFacade.Products.list(
-            this.token,
-            function(data) {
-                resolve(data.response);
-            },
-            function(errorData) {
-                reject(errorData);
-            });
+        apiFacade.Products.list(token)
+            .then(
+                function(successObject) {
+                    resolve(successObject.data);
+                },
+                reject
+            );
     });
 };
 
+/**
+ *
+ * @param {!Object} product
+ * @param {!String} sku
+ * @returns {Promise}
+ */
 JetConnection.prototype.createProducts = function(product, sku) {
     var apiFacade = this.apiFacade;
+    var token = this.token;
+
     return new Promise(function(resolve, reject) {
-        apiFacade.Products.create(product, sku, this.token,
-            function(data) {
-                resolve(data.response);
-            },
-            function(errorData) {
-                reject(errorData);
-            });
+        apiFacade.Products.create(product, sku, token)
+            .then(
+                function(successObject) {
+                    resolve(successObject.data);
+                },
+                reject
+            );
     });
+};
+
+
+/**
+ *
+ * @returns {Promise}
+ */
+JetConnection.prototype.getToken = function() {
+    var self = this;
+    return new Promise(function(resolve, reject){
+        if (self.token) {
+            resolve(self.token);
+        } else {
+            reject("Token not set!")
+        }
+    })
 };
 
 

@@ -9,9 +9,9 @@ describe ("Creating a Connection", function(){
         var JetApi = require("../jet-api");
         var JetConnection = require("../JetConnection");
 
-        var JC = JetApi.connect(process.env.API_USER, process.env.API_SECRET);
+        var result = JetApi.connect(process.env.API_USER, process.env.API_SECRET);
 
-        expect(JC instanceof Promise).toBe(true);
+        expect(result instanceof Promise).toBe(true);
     });
 });
 
