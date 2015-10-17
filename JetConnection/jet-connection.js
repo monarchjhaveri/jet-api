@@ -34,6 +34,16 @@ JetConnection.prototype.listProducts = function() {
         })
 };
 
+JetConnection.prototype.createProducts = function(product, sku) {
+    ApiFacade.Products.create(product, sku, this.token,
+        function(data) {
+            console.log(data);
+        },
+        function(errors) {
+            console.log(errors);
+        })
+};
+
 
 
 module.exports = JetConnection;

@@ -3,10 +3,17 @@ var JetConnection = require("./JetConnection");
 
 var JetApi = {};
 
-JetApi.connect = function connect() {
+/**
+ * Logs into the Jet API using specified apiUser and apiSecret.
+ *
+ * @param {!String} apiUser
+ * @param {!String} apiSecret
+ * @returns {JetConnection}
+ */
+JetApi.connect = function connect(apiUser, apiSecret) {
     return new JetConnection(
-        process.env.API_USER,
-        process.env.API_SECRET
+        apiUser,
+        apiSecret
     );
 };
 
