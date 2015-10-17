@@ -12,7 +12,7 @@ describe ("Creating a Connection", function(){
         var JC = JetApi.connect(process.env.API_USER, process.env.API_SECRET);
 
         expect(JC instanceof Promise).toBe(true);
-    })
+    });
 });
 
 

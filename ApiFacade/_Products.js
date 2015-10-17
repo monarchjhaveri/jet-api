@@ -31,8 +31,8 @@ Products.list = function list(token) {
             function (parsedData) {
                 resolve(new Success(parsedData));
             },
-            function (parsedData) {
-                reject(new ApiRejection("Failed to return list of products", parsedData));
+            function (httpResponse) {
+                reject(new ApiRejection("Failed to return list of products", httpResponse));
             }
         );
     });
@@ -65,8 +65,8 @@ Products.create = function create(product, sku, token) {
             function (parsedData) {
                 resolve(new Success(parsedData));
             },
-            function (parsedData) {
-                reject(new ApiRejection("Could not create product", parsedData));
+            function (httpResponse) {
+                reject(new ApiRejection("Could not create product", httpResponse));
             }
         );
     });

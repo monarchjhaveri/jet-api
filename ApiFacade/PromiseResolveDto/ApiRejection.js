@@ -1,13 +1,13 @@
 /**
  *
  * @param {!String} errorMessage
- * @param {Object} parsedResponse
+ * @param {!Object} httpResponse
  * @constructor
  */
-function ApiRejection(errorMessage, parsedResponse) {
+function ApiRejection(errorMessage, httpResponse) {
     this.type = "ApiRejection";
     this.errorMessage = errorMessage;
-    this.response = parsedResponse;
+    this.httpResponse = httpResponse;
 }
 
 module.exports = ApiRejection;

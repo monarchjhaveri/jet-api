@@ -1,6 +1,6 @@
 /**
  *
- * @param {Object} parsedResponse
+ * @param {!String|!Object} parsedResponse
  * @constructor
  */
 function Success(parsedResponse) {

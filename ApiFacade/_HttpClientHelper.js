@@ -10,16 +10,16 @@ var HttpClientHelper = {};
  */
 HttpClientHelper.request = function request(options, payload) {
     return new Promise(function(resolve, reject) {
-        var request = https.request(options, function(response) {
+        var httpRequest = https.request(options, function(httpResponse) {
             var data = "";
 
-            response.setEncoding("utf8");
+            httpResponse.setEncoding("utf8");
 
-            response.on("data", function(chunk) {
+            httpResponse.on("data", function(chunk) {
                 data += chunk;
             });
 
-            response.on("end", function() {
+            httpResponse.on("end", function() {
                 var parsedData;
                 try {
                     parsedData = JSON.parse(data);
@@ -29,19 +29,19 @@ HttpClientHelper.request = function request(options, payload) {
                     }
                 }
 
-                if (response.statusCode < 200 || response.statusCode > 299) {
-                    reject(parsedData, response);
+                if (httpResponse.statusCode < 200 || httpResponse.statusCode > 299) {
+                    reject(httpResponse);
                 } else {
-                    resolve(parsedData, response);
+                    resolve(parsedData);
                 }
             })
         });
 
         if (payload) {
-            request.write(payload);
+            httpRequest.write(payload);
         }
 
-        request.end();
+        httpRequest.end();
     });
 };
 

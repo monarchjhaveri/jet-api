@@ -1,13 +1,13 @@
 /**
  *
  * @param {!String} errorMessage
- * @param {Object} parsedResponse
+ * @param {!Object} httpResponse
  * @constructor
  */
-function InternalRejection(errorMessage, parsedResponse) {
+function InternalRejection(errorMessage, httpResponse) {
     this.type = "InternalRejection";
     this.errorMessage = errorMessage;
-    this.response = parsedResponse;
+    this.httpResponse = httpResponse;
 }
 
 module.exports = InternalRejection;

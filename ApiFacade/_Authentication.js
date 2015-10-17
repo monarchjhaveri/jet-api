@@ -39,8 +39,8 @@ Authentication.authenticate = function authenticate(apiUser, apiSecret) {
             function (parsedData) {
                 resolve(new Success(parsedData));
             },
-            function (parsedData) {
-                reject(new ApiRejection("Failed to return list of products", parsedData));
+            function (httpResponse) {
+                reject(new ApiRejection("Failed to return list of products", httpResponse));
             }
         );
     });
