@@ -11,10 +11,7 @@ var JetApi = {};
  * @returns {JetConnection}
  */
 JetApi.connect = function connect(apiUser, apiSecret) {
-    return new JetConnection(
-        apiUser,
-        apiSecret
-    );
+    return JetConnection.connect(apiUser, apiSecret);
 };
 
 module.exports = JetApi;
