@@ -23,4 +23,23 @@ describe("Products Namespace", function() {
                 ).catch(done);
         });
     });
+
+    describe("Create Products", function(){
+        it("Should save the product on Jet.com", function(done) {
+            var product = {
+                
+            };
+            JetApi.connect(process.env.API_USER, process.env.API_SECRET)
+                .then(function(jetConnection) {
+                    jetConnection.createProducts()
+                        .then(
+                        function(successObject){
+                            assert(successObject.sku_urls);
+                            done();
+                        }, done
+                    ).catch(done);
+                }
+            ).catch(done);
+        });
+    });
 });
