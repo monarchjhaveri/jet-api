@@ -17,8 +17,8 @@ var TAXONOMY_VERSION = 1;
  */
 TaxonomyApi.listNodes = function listNodes(offset, limit, token) {
     return new Promise(function(resolve, reject) {
-        if (!token) {
-            reject(new InternalRejection("TaxonomyApi.listNodes: token must be present."));
+        if (!token || (offset != 0) || !limit || !token) {
+            reject(new InternalRejection("TaxonomyApi.listNodes: offset, limit and token must be present."));
         }
 
         var options = {

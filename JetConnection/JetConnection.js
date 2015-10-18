@@ -1,5 +1,6 @@
 var ApiFacade = require ("../ApiFacade");
 var Products = require("./_Products");
+var Taxonomy = require("./_Taxonomy");
 
 /**
  *
@@ -19,6 +20,7 @@ function JetConnection(user, pass, token, token_type, expires_on, apiFacade) {
     this.expires_on = expires_on;
     this.apiFacade = apiFacade;
     this.Products = new Products(this);
+    this.Taxonomy = new Taxonomy(this);
 }
 
 module.exports = JetConnection;
