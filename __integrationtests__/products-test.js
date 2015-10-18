@@ -12,7 +12,7 @@ describe("Products Namespace", function() {
         it("Should return a list of all products currently on Jet", function(done) {
             JetApi.connect(process.env.API_USER, process.env.API_SECRET)
                 .then(function(jetConnection) {
-                    jetConnection.listProducts()
+                    jetConnection.Products.listProducts()
                         .then(
                             function(successObject){
                                 assert(successObject.sku_urls);
@@ -24,22 +24,22 @@ describe("Products Namespace", function() {
         });
     });
 
-    describe("Create Products", function(){
-        it("Should save the product on Jet.com", function(done) {
-            var product = {
-                
-            };
-            JetApi.connect(process.env.API_USER, process.env.API_SECRET)
-                .then(function(jetConnection) {
-                    jetConnection.createProducts()
-                        .then(
-                        function(successObject){
-                            assert(successObject.sku_urls);
-                            done();
-                        }, done
-                    ).catch(done);
-                }
-            ).catch(done);
-        });
-    });
+    //describe("Create Products", function(){
+    //    it("Should save the product on Jet.com", function(done) {
+    //        var product = {
+    //
+    //        };
+    //        JetApi.connect(process.env.API_USER, process.env.API_SECRET)
+    //            .then(function(jetConnection) {
+    //                jetConnection.createProducts()
+    //                    .then(
+    //                    function(successObject){
+    //                        assert(successObject.sku_urls);
+    //                        done();
+    //                    }, done
+    //                ).catch(done);
+    //            }
+    //        ).catch(done);
+    //    });
+    //});
 });

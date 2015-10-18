@@ -1,4 +1,5 @@
 var ApiFacade = require ("../ApiFacade");
+var Products = require("./_Products");
 
 /**
  *
@@ -17,91 +18,7 @@ function JetConnection(user, pass, token, token_type, expires_on, apiFacade) {
     this.token_type = token_type;
     this.expires_on = expires_on;
     this.apiFacade = apiFacade;
+    this.Products = new Products(this);
 }
-
-/**
- *
- * @param {!String} apiUser
- * @param {!String} apiSecret
- * @param {!ApiFacade} apiFacade
- * @returns {Promise}
- */
-JetConnection.connect = function(apiUser, apiSecret, apiFacade){
-    return new Promise(function(resolve, reject) {
-        apiFacade.Authentication.authenticate(apiUser, apiSecret)
-            .then(
-                function(data) {
-                    var jc = new JetConnection(
-                        apiUser,
-                        apiSecret,
-                        data.data.id_token,
-                        data.data.token_type,
-                        Date(data.data.expires_on),
-                        apiFacade
-                    );
-                    resolve(jc);
-                },
-                reject
-            )
-            .catch(reject);
-    });
-};
-
-/**
- *
- * @returns {Promise}
- */
-JetConnection.prototype.listProducts = function() {
-    var apiFacade = this.apiFacade;
-    var token = this.token;
-    return new Promise(function(resolve, reject) {
-        apiFacade.Products.list(token)
-            .then(
-                function(successObject) {
-                    resolve(successObject.data);
-                },
-                reject
-        ).catch(reject);
-    });
-};
-
-/**
- *
- * @param {!Object} product
- * @param {!String} sku
- * @returns {Promise}
- */
-JetConnection.prototype.createProducts = function(product, sku) {
-    var apiFacade = this.apiFacade;
-    var token = this.token;
-
-    return new Promise(function(resolve, reject) {
-        apiFacade.Products.create(product, sku, token)
-            .then(
-                function(successObject) {
-                    resolve(successObject.data);
-                },
-                reject
-            ).catch(reject);
-    });
-};
-
-
-/**
- *
- * @returns {Promise}
- */
-JetConnection.prototype.getToken = function() {
-    var self = this;
-    return new Promise(function(resolve, reject){
-        if (self.token) {
-            resolve(self.token);
-        } else {
-            reject("Token not set!")
-        }
-    })
-};
-
-
 
 module.exports = JetConnection;

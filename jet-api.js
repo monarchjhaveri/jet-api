@@ -5,14 +5,32 @@ var ApiFacade = require("./ApiFacade");
 var JetApi = {};
 
 /**
- * Logs into the Jet API using specified apiUser and apiSecret.
  *
  * @param {!String} apiUser
  * @param {!String} apiSecret
+ * @param {!ApiFacade} apiFacade
  * @returns {Promise}
  */
 JetApi.connect = function connect(apiUser, apiSecret) {
-    return JetConnection.connect(apiUser, apiSecret, new ApiFacade());
+    var apiFacade = new ApiFacade();
+    return new Promise(function(resolve, reject) {
+        apiFacade.Authentication.authenticate(apiUser, apiSecret)
+            .then(
+            function(data) {
+                var jc = new JetConnection(
+                    apiUser,
+                    apiSecret,
+                    data.data.id_token,
+                    data.data.token_type,
+                    Date(data.data.expires_on),
+                    apiFacade
+                );
+                resolve(jc);
+            },
+            reject
+        )
+            .catch(reject);
+    });
 };
 
 module.exports = JetApi;
