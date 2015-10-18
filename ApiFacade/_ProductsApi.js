@@ -4,17 +4,17 @@ var ApiRejection = require("./PromiseResolveDto/ApiRejection");
 var InternalRejection = require("./PromiseResolveDto/InternalRejection");
 var Success = require("./PromiseResolveDto/Success");
 
-var Products = {};
+var ProductsApi = {};
 
 /**
  *
  * @param {!String} token
  * @returns {Promise}
  */
-Products.list = function list(token) {
+ProductsApi.list = function list(token) {
     return new Promise(function(resolve, reject) {
         if (!token) {
-            reject(new InternalRejection("Products.list: token must be present."));
+            reject(new InternalRejection("ProductsApi.list: token must be present."));
         }
         var options = {
             hostname: Constants.URL.ROOT,
@@ -45,10 +45,10 @@ Products.list = function list(token) {
  * @param {!String} token
  * @returns {Promise}
  */
-Products.create = function create(product, sku, token) {
+ProductsApi.create = function create(product, sku, token) {
     return new Promise(function(resolve, reject) {
         if (!product || !sku || !token) {
-            reject(new InternalRejection("Products.create: product, sku and token must all be present."));
+            reject(new InternalRejection("ProductsApi.create: product, sku and token must all be present."));
         }
 
         var options = {
@@ -66,10 +66,10 @@ Products.create = function create(product, sku, token) {
                 resolve(new Success(parsedData));
             },
             function (httpResponse) {
-                reject(new ApiRejection("Could not create product", httpResponse));
+                reject(new ApiRejection("ProductsApi.create: Could not create product", httpResponse));
             }
         );
     });
 };
 
-module.exports = Products;
+module.exports = ProductsApi;

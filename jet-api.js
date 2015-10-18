@@ -8,13 +8,12 @@ var JetApi = {};
  *
  * @param {!String} apiUser
  * @param {!String} apiSecret
- * @param {!ApiFacade} apiFacade
  * @returns {Promise}
  */
 JetApi.connect = function connect(apiUser, apiSecret) {
     var apiFacade = new ApiFacade();
     return new Promise(function(resolve, reject) {
-        apiFacade.Authentication.authenticate(apiUser, apiSecret)
+        apiFacade.AuthenticationApi.authenticate(apiUser, apiSecret)
             .then(
             function(data) {
                 var jc = new JetConnection(

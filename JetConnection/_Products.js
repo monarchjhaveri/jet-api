@@ -1,4 +1,4 @@
-function Products(jetConnection){
+var Products = function(jetConnection){
     this.jetConnection = jetConnection;
 }
 
@@ -11,7 +11,7 @@ Products.prototype.listProducts = function() {
     var token = this.jetConnection.token;
 
     return new Promise(function(resolve, reject) {
-        apiFacade.Products.list(token)
+        apiFacade.ProductsApi.list(token)
             .then(
             function(successObject) {
                 resolve(successObject.data);
@@ -28,12 +28,12 @@ Products.prototype.listProducts = function() {
  * @param {!String} sku
  * @returns {Promise}
  */
-Products.prototype.createProducts = function(product, sku) {
+Products.prototype.createProduct = function(product, sku) {
     var apiFacade = this.jetConnection.apiFacade;
     var token = this.jetConnection.token;
 
     return new Promise(function(resolve, reject) {
-        apiFacade.Products.create(product, sku, token)
+        apiFacade.ProductsApi.create(product, sku, token)
             .then(
             function(successObject) {
                 resolve(successObject.data);

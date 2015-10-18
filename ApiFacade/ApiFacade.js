@@ -1,11 +1,11 @@
-var Authentication = require("./_Authentication");
-var Products = require("./_Products");
-var Taxonomy = require("./_Taxonomy");
+var AuthenticationApi = require("./_AuthenticationApi");
+var ProductsApi = require("./_ProductsApi");
+var TaxonomyApi = require("./_TaxonomyApi");
 
 function ApiFacade() {
-    this.Authentication = Authentication;
-    this.Products = Products;
-    this.Taxonomy = Taxonomy;
+    this.AuthenticationApi = AuthenticationApi;
+    this.ProductsApi = ProductsApi;
+    this.TaxonomyApi = TaxonomyApi;
 }
 
 module.exports = ApiFacade;

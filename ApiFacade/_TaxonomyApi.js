@@ -4,7 +4,7 @@ var ApiRejection = require("./PromiseResolveDto/ApiRejection");
 var InternalRejection = require("./PromiseResolveDto/InternalRejection");
 var Success = require("./PromiseResolveDto/Success");
 
-var Taxonomy = {};
+var TaxonomyApi = {};
 
 var TAXONOMY_VERSION = 1;
 
@@ -15,10 +15,10 @@ var TAXONOMY_VERSION = 1;
  * @param {string} token
  * @returns {Promise}
  */
-Taxonomy.listNodes = function listNodes(offset, limit, token) {
+TaxonomyApi.listNodes = function listNodes(offset, limit, token) {
     return new Promise(function(resolve, reject) {
         if (!token) {
-            reject(new InternalRejection("Taxonomy.listNodes: token must be present."));
+            reject(new InternalRejection("TaxonomyApi.listNodes: token must be present."));
         }
 
         var options = {
@@ -46,4 +46,4 @@ Taxonomy.listNodes = function listNodes(offset, limit, token) {
     });
 };
 
-module.exports = Taxonomy;
+module.exports = TaxonomyApi;

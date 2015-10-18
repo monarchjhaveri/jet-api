@@ -5,7 +5,7 @@ var ApiRejection = require("./PromiseResolveDto/ApiRejection");
 var InternalRejection = require("./PromiseResolveDto/InternalRejection");
 var Success = require("./PromiseResolveDto/Success");
 
-var Authentication = {};
+var AuthenticationApi = {};
 
 /**
  *
@@ -13,10 +13,10 @@ var Authentication = {};
  * @param {!String} apiSecret
  * @returns {Promise}
  */
-Authentication.authenticate = function authenticate(apiUser, apiSecret) {
+AuthenticationApi.authenticate = function authenticate(apiUser, apiSecret) {
     return new Promise(function(resolve, reject) {
         if (!apiUser || !apiSecret) {
-            reject(new InternalRejection("Authentication.authenticate: apiUser and apiSecret must be present."));
+            reject(new InternalRejection("AuthenticationApi.authenticate: apiUser and apiSecret must be present."));
         }
 
         var payload = JSON.stringify({
@@ -46,4 +46,4 @@ Authentication.authenticate = function authenticate(apiUser, apiSecret) {
     });
 };
 
-module.exports = Authentication;
+module.exports = AuthenticationApi;
