@@ -22,17 +22,11 @@ TaxonomyApi.listNodes = function listNodes(offset, limit, token) {
         }
 
         var options = {
-            hostname: Constants.URL.ROOT,
             path: Constants.URL.TAXONOMY.LIST_NODES
                 .replace("{version}", TAXONOMY_VERSION)
                 .replace("{offset}", offset)
                 .replace("{limit}", limit),
-            method: 'GET',
-            headers: {
-                "Host": "merchant-api.jet.com",
-                "Content-Length": 0,
-                "Authorization": "Bearer " + token
-            }
+            token: token
         };
 
         HttpClientHelper.request(options).then(

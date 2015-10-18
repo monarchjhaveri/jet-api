@@ -17,14 +17,9 @@ ProductsApi.list = function list(token) {
             reject(new InternalRejection("ProductsApi.list: token must be present."));
         }
         var options = {
-            hostname: Constants.URL.ROOT,
             path: Constants.URL.PRODUCT.LIST,
             method: 'GET',
-            headers: {
-                "Host": "merchant-api.jet.com",
-                "Content-Length": 0,
-                "Authorization": "Bearer " + token
-            }
+            token: token
         };
 
         HttpClientHelper.request(options).then(
@@ -52,13 +47,9 @@ ProductsApi.create = function create(product, sku, token) {
         }
 
         var options = {
-            hostname: Constants.URL.ROOT,
             path: Constants.URL.PRODUCT.CREATE.replace("{id}", sku),
             method: 'PUT',
-            headers: {
-                "Host": "merchant-api.jet.com",
-                "Authorization": "Bearer " + token
-            }
+            token: token
         };
 
         //var productString = JSON.stringify(product);

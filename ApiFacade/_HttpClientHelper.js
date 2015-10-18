@@ -1,14 +1,31 @@
 var https = require("https");
 
 var HttpClientHelper = {};
+var Constants = require("./Constants");
 
 /**
  *
- * @param {!Object} options
+ * @param {!Object} theOptions
  * @param {Object} payload
  * @returns {Promise}
  */
-HttpClientHelper.request = function request(options, payload) {
+HttpClientHelper.request = function request(theOptions, payload) {
+    if (!theOptions.path) {
+        return Promise.reject("Must have at least path defined in theOptions.")
+    }
+
+    var options = {
+        hostname: Constants.URL.ROOT,
+        path: theOptions.path,
+        method: theOptions.method || 'GET',
+        headers: {
+            "Host": "merchant-api.jet.com",
+            "Content-Type": "application/json",
+            "Content-Length": payload ? Buffer.byteLength(payload) : 0,
+            "Authorization": theOptions.token ? "Bearer " + theOptions.token : null
+        }
+    };
+
     return new Promise(function(resolve, reject) {
         var httpRequest = https.request(options, function(httpResponse) {
             var data = "";

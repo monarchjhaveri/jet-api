@@ -25,14 +25,8 @@ AuthenticationApi.authenticate = function authenticate(apiUser, apiSecret) {
         });
 
         var options = {
-            hostname: Constants.URL.ROOT,
             path: Constants.URL.TOKEN,
-            method: 'POST',
-            headers: {
-                "Host": "merchant-api.jet.com",
-                "Content-Type": "application/json",
-                "Content-Length": Buffer.byteLength(payload)
-            }
+            method: 'POST'
         };
 
         HttpClientHelper.request(options, payload).then(
