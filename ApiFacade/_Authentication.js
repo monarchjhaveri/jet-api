@@ -46,32 +46,4 @@ Authentication.authenticate = function authenticate(apiUser, apiSecret) {
     });
 };
 
-Authentication.logout = function logout(token) {
-    return new Promise(function(resolve, reject) {
-        if (!token) {
-            reject(new InternalRejection("Authentication.logout: token must be present."));
-        }
-
-        var options = {
-            hostname: Constants.URL.ROOT,
-            path: Constants.URL.TOKEN,
-            method: 'DELETE',
-            headers: {
-                "Host": "merchant-api.jet.com",
-                "Content-Length": 0,
-                "Authorization": "Bearer " + token
-            }
-        };
-
-        HttpClientHelper.request(options, payload).then(
-            function (parsedData) {
-                resolve(new Success(parsedData));
-            },
-            function (httpResponse) {
-                reject(new ApiRejection("Failed to logout", httpResponse));
-            }
-        );
-    });
-};
-
 module.exports = Authentication;

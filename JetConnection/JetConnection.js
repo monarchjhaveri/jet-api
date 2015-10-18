@@ -43,23 +43,8 @@ JetConnection.connect = function(apiUser, apiSecret, apiFacade){
                 },
                 reject
             )
-            .catch(function(error) {
-                console.log(error);
-            });
+            .catch(reject);
     });
-};
-
-JetConnection.prototype.logout = function() {
-    var apiFacade = this.apiFacade;
-    var token = this.token;
-
-    apiFacade.Authentication.logout(token)
-        .then(
-            function(successObject) {
-                resolve(successObject.data);
-            },
-            reject
-        );
 };
 
 /**
@@ -76,7 +61,7 @@ JetConnection.prototype.listProducts = function() {
                     resolve(successObject.data);
                 },
                 reject
-            );
+        ).catch(reject);
     });
 };
 
@@ -97,7 +82,7 @@ JetConnection.prototype.createProducts = function(product, sku) {
                     resolve(successObject.data);
                 },
                 reject
-            );
+            ).catch(reject);
     });
 };
 
