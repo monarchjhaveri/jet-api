@@ -61,14 +61,16 @@ ProductsApi.create = function create(product, sku, token) {
             }
         };
 
-        HttpClientHelper.request(options, product).then(
+        //var productString = JSON.stringify(product);
+        var productString = JSON.stringify(product);
+
+        HttpClientHelper.request(options, productString).then(
             function (parsedData) {
                 resolve(new Success(parsedData));
-            },
-            function (httpResponse) {
-                reject(new ApiRejection("ProductsApi.create: Could not create product", httpResponse));
             }
-        );
+        ).catch(function(error) {
+                reject(error);
+            });
     });
 };
 
