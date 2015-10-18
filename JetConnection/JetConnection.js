@@ -47,7 +47,19 @@ JetConnection.connect = function(apiUser, apiSecret, apiFacade){
                 console.log(error);
             });
     });
+};
 
+JetConnection.prototype.logout = function() {
+    var apiFacade = this.apiFacade;
+    var token = this.token;
+
+    apiFacade.Authentication.logout(token)
+        .then(
+            function(successObject) {
+                resolve(successObject.data);
+            },
+            reject
+        );
 };
 
 /**
