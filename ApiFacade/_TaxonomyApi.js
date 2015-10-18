@@ -6,7 +6,7 @@ var Success = require("./PromiseResolveDto/Success");
 
 var TaxonomyApi = {};
 
-var TAXONOMY_VERSION = 1;
+var TAXONOMY_VERSION = "v1";
 
 /**
  *
