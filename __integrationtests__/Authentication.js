@@ -1,6 +1,7 @@
 var chai = require("chai");
 var mocha = require("mocha");
 var JetApi = require("../jet-api");
+var TestHelper = require("./TestHelper");
 
 var expect = chai.expect;
 var assert = chai.assert;
@@ -18,9 +19,7 @@ describe("Connection test", function() {
                 assert.ok(jetConnection.expires_on);
                 assert.ok(jetConnection.apiFacade);
                 done();
-            })
-            .catch(function(error) {
-                done(error);
-            });
+            }, TestHelper.failureCallbackGenerator("Failed to connect successfully", done))
+            .catch(TestHelper.failureCallbackGenerator("Failed to connect successfully", done));
     });
 });

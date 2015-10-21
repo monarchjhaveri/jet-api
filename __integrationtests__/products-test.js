@@ -2,6 +2,7 @@ var chai = require("chai");
 var mocha = require("mocha");
 var JetApi = require("../jet-api");
 var JetConnection = require("../JetConnection");
+var TestHelper = require("./TestHelper");
 
 var expect = chai.expect;
 var assert = chai.assert;
@@ -18,10 +19,10 @@ describe("Products Namespace", function() {
                             function(successObject){
                                 assert.ok(successObject.sku_urls);
                                 done();
-                            }, done
-                        ).catch(done);
+                            }, TestHelper.failureCallbackGenerator("Failed to get list of all products", done)
+                        ).catch(TestHelper.failureCallbackGenerator("Failed to get list of all products", done));
                     }
-                ).catch(done);
+                ).catch(TestHelper.failureCallbackGenerator("Failed to get list of all products", done));
         });
     });
 
@@ -41,21 +42,16 @@ describe("Products Namespace", function() {
                         "multipack_quantity": 1
                     };
 
-                    var sku = "123456782";
+                    var sku = TestHelper.generateRandomString(10);
                     jetConnection.Products.createProduct(product, sku)
                         .then(
                         function(successObject){
                             assert.ok(successObject.sku_urls);
                             done();
-                        },
-                        function(error) {
-                            done(error.statusMessage);
-                        }
-                    ).catch(function(error) {
-                            done(error.statusMessage);
-                    });
+                        }, TestHelper.failureCallbackGenerator("Failed to create product", done)
+                    ).catch(TestHelper.failureCallbackGenerator("Failed to create product", done));
                 }
-            ).catch(done);
+            ).catch(TestHelper.failureCallbackGenerator("Failed to create product", done));
         });
     });
 
@@ -76,20 +72,11 @@ describe("Products Namespace", function() {
                                 return jetConnection.Products.getDetails(sku);
                             })).then(function(values) {
                                 done();
-                            }).catch(function(d) {
-                                done("Failed!", d.statusMessage);
-                            });
-                        },
-                        function(error) {
-                            done(error.statusMessage);
-                        }
-                    ).catch(function(error) {
-                            done(error.statusMessage);
-                        });
+                            }).catch(TestHelper.failureCallbackGenerator("Failed to get product details.", done));
+                        },TestHelper.failureCallbackGenerator("Failed to get product details.", done)
+                    ).catch(TestHelper.failureCallbackGenerator("Failed to get product details.", done));
                 }
-            ).catch(done);
+            ).catch(TestHelper.failureCallbackGenerator("Failed to get product details.", done));
         });
     });
-
-
 });

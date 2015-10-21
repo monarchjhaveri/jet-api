@@ -2,6 +2,7 @@ var chai = require("chai");
 var mocha = require("mocha");
 var JetApi = require("../jet-api");
 var JetConnection = require("../JetConnection");
+var TestHelper = require("./TestHelper");
 
 var expect = chai.expect;
 var assert = chai.assert;
@@ -18,10 +19,10 @@ describe("Taxonomy Namespace", function() {
                         function(successObject){
                             assert.ok(successObject.node_urls);
                             done();
-                        }, done
-                    ).catch(done);
+                        }, TestHelper.failureCallbackGenerator("Failed to get product details.", done)
+                    ).catch(TestHelper.failureCallbackGenerator("Failed to get product details.", done));
                 }
-            ).catch(done);
+            ).catch(TestHelper.failureCallbackGenerator("Failed to get product details.", done));
         });
     });
 });
