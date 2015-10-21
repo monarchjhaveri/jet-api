@@ -9,7 +9,7 @@ describe ("Creating a Connection", function(){
         var JetApi = require("../jet-api");
         var JetConnection = require("../JetConnection");
 
-        var result = JetApi.connect(process.env.API_USER, process.env.API_SECRET);
+        var result = JetApi.connect(process.env.TEST_API_USER, process.env.TEST_API_SECRET);
 
         expect(result instanceof Promise).toBe(true);
     });

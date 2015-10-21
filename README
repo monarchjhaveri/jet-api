@@ -1,10 +1,10 @@
 ####Dev Setup:
 
-Create a .env file in the root directory. The contents should be as follows. You can get the `API_USER` and `API_SECRET`
+Create a .env file in the root directory. The contents should be as follows. You can get the `TEST_API_USER` and `TEST_API_SECRET`
 values from www.partner.jet.com:
 
-    API_USER=your_api_user_key
-    API_SECRET=your_api_secret
+    TEST_API_USER=your_api_user_key
+    TEST_API_SECRET=your_api_secret
 
 ####Authenticating:
 

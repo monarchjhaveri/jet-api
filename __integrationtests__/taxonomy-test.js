@@ -11,7 +11,7 @@ describe("Taxonomy Namespace", function() {
 
     describe("List Taxonomy Nodes", function(){
         it("Should return a list of all of the nodes on Jet", function(done) {
-            JetApi.connect(process.env.API_USER, process.env.API_SECRET)
+            JetApi.connect(process.env.TEST_API_USER, process.env.TEST_API_SECRET)
                 .then(function(jetConnection) {
                     jetConnection.Taxonomy.listNodes(0, 100)
                         .then(

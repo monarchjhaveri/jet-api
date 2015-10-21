@@ -11,7 +11,7 @@ describe("Products Namespace", function() {
 
     describe("List Products", function(){
         it("Should return a list of all products currently on Jet", function(done) {
-            JetApi.connect(process.env.API_USER, process.env.API_SECRET)
+            JetApi.connect(process.env.TEST_API_USER, process.env.TEST_API_SECRET)
                 .then(function(jetConnection) {
                     jetConnection.Products.listProducts()
                         .then(
@@ -27,7 +27,7 @@ describe("Products Namespace", function() {
 
     describe("Create Products", function(){
         it("Should save the product on Jet.com", function(done) {
-            JetApi.connect(process.env.API_USER, process.env.API_SECRET)
+            JetApi.connect(process.env.TEST_API_USER, process.env.TEST_API_SECRET)
                 .then(function(jetConnection) {
 
                     var product = {
@@ -61,7 +61,7 @@ describe("Products Namespace", function() {
 
     describe("Get product details", function(){
         it("Should get product details from Jet.com", function(done) {
-            JetApi.connect(process.env.API_USER, process.env.API_SECRET)
+            JetApi.connect(process.env.TEST_API_USER, process.env.TEST_API_SECRET)
                 .then(function(jetConnection) {
                     jetConnection.Products.listProducts()
                         .then(
