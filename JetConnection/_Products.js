@@ -33,7 +33,7 @@ Products.prototype.listProductSkus = function() {
 
 /**
  *
- * @param {!Object} product
+ * @param {!Product} product
  * @param {!String} sku
  * @returns {Promise}
  */
@@ -73,3 +73,14 @@ Products.prototype.getDetails = function(merchantSku) {
 };
 
 module.exports = Products;
+
+
+/**
+ * @typedef {Object} StandardProductCode
+ * @type {{standard_product_code: !string, standard_product_code_type: !string}}
+ */
+
+/**
+ * @typedef {Object} Product
+ * @type {{product_title: !string, standard_product_codes: !StandardProductCode[], multipack_quantity: !number}}
+ */
