@@ -12,12 +12,12 @@ Step 3: Run `npm install` from the root directory of this project.
 
 P.S.: You can include a local repository in your package.json [ like this. ][1]
 
-#Integration Test Setup:
+#Integration Test Setup (Recommended):
 
 Currently, the best way to test the library is by debugging while running `npm run integration-test`
 
-Create a .env file in the root directory of this project. The file has been gitignored already. The contents should be
-as follows:
+Create a file with the name `.env` in the root directory of this project. The file has been gitignored already.
+The contents should be as follows:
 
     TEST_API_USER=your_api_user_key
     TEST_API_SECRET=your_api_secret
