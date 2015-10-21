@@ -2,7 +2,6 @@ var Constants = require("./Constants");
 var HttpClientHelper = require("./_HttpClientHelper");
 var ApiRejection = require("./PromiseResolveDto/ApiRejection");
 var InternalRejection = require("./PromiseResolveDto/InternalRejection");
-var Success = require("./PromiseResolveDto/Success");
 
 var TaxonomyApi = {};
 
@@ -31,7 +30,7 @@ TaxonomyApi.listNodes = function listNodes(offset, limit, token) {
 
         HttpClientHelper.request(options).then(
             function (parsedData) {
-                resolve(new Success(parsedData));
+                resolve(parsedData);
             },
             function (httpResponse) {
                 reject(new ApiRejection("Failed to return Taxonomy list of nodes", httpResponse));

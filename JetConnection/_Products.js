@@ -15,8 +15,15 @@ Products.prototype.listProductSkus = function() {
     return new Promise(function(resolve, reject) {
         apiFacade.ProductsApi.list(token)
             .then(
-            function(successObject) {
-                resolve(successObject.data);
+            /**
+             *
+             * @param data
+             * @param {String[]} data.sku_urls
+             */
+            function(data) {
+                resolve(data.sku_urls.map(function(d) {
+                    return SkuParserHelper.getSkuFromUrl(d);
+                }));
             },
             reject
         ).catch(reject);
@@ -37,8 +44,8 @@ Products.prototype.createProduct = function(product, sku) {
     return new Promise(function(resolve, reject) {
         apiFacade.ProductsApi.create(product, sku, token)
             .then(
-            function(successObject) {
-                resolve(successObject.data);
+            function() {
+                resolve();
             },
             reject
         ).catch(reject);

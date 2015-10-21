@@ -7,7 +7,13 @@ var TestHelper = {};
  */
 TestHelper.failureCallbackGenerator = function (message, done) {
     return function(values) {
-        done(new Error(message, values));
+        if (values instanceof Error) {
+            console.log(message);
+            done(values);
+        } else {
+            console.log(values);
+            done(new Error(message, values));
+        }
     }
 };
 

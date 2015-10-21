@@ -17,7 +17,7 @@ describe("Products Namespace", function() {
                     jetConnection.Products.listProductSkus()
                         .then(
                             function(successObject){
-                                assert.ok(successObject.sku_urls);
+                                assert.ok(successObject);
                                 done();
                             }, TestHelper.failureCallbackGenerator("Failed to get list of all products", done)
                         ).catch(TestHelper.failureCallbackGenerator("Failed to get list of all products", done));
@@ -45,8 +45,7 @@ describe("Products Namespace", function() {
                     var sku = TestHelper.generateRandomString(10);
                     jetConnection.Products.createProduct(product, sku)
                         .then(
-                        function(successObject){
-                            assert.ok(successObject.sku_urls);
+                        function(){
                             done();
                         }, TestHelper.failureCallbackGenerator("Failed to create product", done)
                     ).catch(TestHelper.failureCallbackGenerator("Failed to create product", done));
@@ -61,16 +60,15 @@ describe("Products Namespace", function() {
                 .then(function(jetConnection) {
                     jetConnection.Products.listProductSkus()
                         .then(
-                        function(successObject){
-                            assert.ok(successObject.sku_urls.length,
-                                "Must have at least 1 item in products on Jet.com in order to test getDetails.");
+                        function(skuArray){
+                            assert.isTrue(skuArray && skuArray.length > 0,
+                                "Must have at least 1 item in products on Jet.com in order to test getDetails.")
 
-                            var testArray = successObject.sku_urls.slice(0,5); // max 5 test items
+                            var testArray = skuArray.slice(0,5); // max 5 test items
 
                             Promise.all(testArray.map(function(d){
-                                var sku = JetApi.Helpers.getSkuFromUrl(d);
-                                return jetConnection.Products.getDetails(sku);
-                            })).then(function(values) {
+                                return jetConnection.Products.getDetails(d);
+                            })).then(function(d) {
                                 done();
                             }).catch(TestHelper.failureCallbackGenerator("Failed to get product details.", done));
                         },TestHelper.failureCallbackGenerator("Failed to get product details.", done)

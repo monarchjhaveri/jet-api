@@ -3,7 +3,6 @@ var Constants = require("./Constants");
 var HttpClientHelper = require("./_HttpClientHelper");
 var ApiRejection = require("./PromiseResolveDto/ApiRejection");
 var InternalRejection = require("./PromiseResolveDto/InternalRejection");
-var Success = require("./PromiseResolveDto/Success");
 
 var AuthenticationApi = {};
 
@@ -31,7 +30,7 @@ AuthenticationApi.authenticate = function authenticate(apiUser, apiSecret) {
 
         HttpClientHelper.request(options, payload).then(
             function (parsedData) {
-                resolve(new Success(parsedData));
+                resolve(parsedData);
             },
             function (httpResponse) {
                 reject(new ApiRejection("Failed to return list of products", httpResponse));

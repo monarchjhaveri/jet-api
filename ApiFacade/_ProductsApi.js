@@ -2,7 +2,6 @@ var Constants = require("./Constants");
 var HttpClientHelper = require("./_HttpClientHelper");
 var ApiRejection = require("./PromiseResolveDto/ApiRejection");
 var InternalRejection = require("./PromiseResolveDto/InternalRejection");
-var Success = require("./PromiseResolveDto/Success");
 
 var ProductsApi = {};
 
@@ -24,7 +23,7 @@ ProductsApi.list = function list(token) {
 
         HttpClientHelper.request(options).then(
             function (parsedData) {
-                resolve(new Success(parsedData));
+                resolve(parsedData);
             },
             function (httpResponse) {
                 reject(new ApiRejection("Failed to return list of products", httpResponse));
@@ -56,8 +55,8 @@ ProductsApi.create = function create(product, sku, token) {
         var productString = JSON.stringify(product);
 
         HttpClientHelper.request(options, productString).then(
-            function (parsedData) {
-                resolve(new Success(parsedData));
+            function () {
+                resolve();
             }
         ).catch(function(error) {
                 reject(error);
@@ -86,7 +85,7 @@ ProductsApi.getDetails = function create(merchantSku, token) {
 
         HttpClientHelper.request(options, null).then(
             function (parsedData) {
-                resolve(new Success(parsedData));
+                resolve(parsedData);
             }
         ).catch(function(error) {
                 reject(error);

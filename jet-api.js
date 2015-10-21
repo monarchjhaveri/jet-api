@@ -19,9 +19,9 @@ JetApi.connect = function connect(apiUser, apiSecret) {
                 var jc = new JetConnection(
                     apiUser,
                     apiSecret,
-                    data.data.id_token,
-                    data.data.token_type,
-                    Date(data.data.expires_on),
+                    data.id_token,
+                    data.token_type,
+                    Date(data.expires_on),
                     apiFacade
                 );
                 resolve(jc);
