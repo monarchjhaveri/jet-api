@@ -55,6 +55,7 @@ describe("Products Namespace", function() {
     });
 
     describe("Get product details", function(){
+        this.timeout(15000);
         it("Should get product details from Jet.com", function(done) {
             JetApi.connect(process.env.TEST_API_USER, process.env.TEST_API_SECRET)
                 .then(function(jetConnection) {
@@ -66,9 +67,18 @@ describe("Products Namespace", function() {
 
                             var testArray = skuArray.slice(0,5); // max 5 test items
 
-                            Promise.all(testArray.map(function(d){
-                                return jetConnection.Products.getDetails(d);
-                            })).then(function(d) {
+                            Promise.all(testArray.map(function(testSku){
+                                return jetConnection.Products.getDetails(testSku);
+                            })).then(function(detailedDtoArray) {
+                                for (var i = 0; i < testArray.length; i++) {
+                                    var sku = testArray[i];
+                                    var detailedDto = detailedDtoArray.find(function(dto) {
+                                        return dto.merchant_sku === sku;
+                                    });
+                                    if (!detailedDto) {
+                                        done(new Error("No detailed object returned for merchant_sku===" + sku));
+                                    }
+                                }
                                 done();
                             }).catch(TestHelper.failureCallbackGenerator("Failed to get product details.", done));
                         },TestHelper.failureCallbackGenerator("Failed to get product details.", done)

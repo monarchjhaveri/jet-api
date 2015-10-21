@@ -16,7 +16,7 @@ Taxonomy.prototype.listNodes = function(offset, limit) {
         apiFacade.TaxonomyApi.listNodes(offset, limit, token)
             .then(
             function(successObject) {
-                resolve(successObject.data);
+                resolve(successObject);
             },
             reject
         ).catch(reject);

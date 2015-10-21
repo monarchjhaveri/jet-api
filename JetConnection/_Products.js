@@ -65,7 +65,7 @@ Products.prototype.getDetails = function(merchantSku) {
         apiFacade.ProductsApi.getDetails(merchantSku, token)
             .then(
             function(successObject) {
-                resolve(successObject.data);
+                resolve(successObject);
             },
             reject
         ).catch(reject);
