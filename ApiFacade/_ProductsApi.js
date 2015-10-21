@@ -65,4 +65,33 @@ ProductsApi.create = function create(product, sku, token) {
     });
 };
 
+
+/**
+ *
+ * @param {!String} merchantSku
+ * @param {!String} token
+ * @returns {Promise}
+ */
+ProductsApi.getDetails = function create(merchantSku, token) {
+    return new Promise(function(resolve, reject) {
+        if (!merchantSku || !token) {
+            reject(new InternalRejection("ProductsApi.create: merchantSku and token must all be present."));
+        }
+
+        var options = {
+            path: Constants.URL.PRODUCT.GET_DETAILS.replace("{id}", merchantSku),
+            method: 'GET',
+            token: token
+        };
+
+        HttpClientHelper.request(options, null).then(
+            function (parsedData) {
+                resolve(new Success(parsedData));
+            }
+        ).catch(function(error) {
+                reject(error);
+            });
+    });
+};
+
 module.exports = ProductsApi;

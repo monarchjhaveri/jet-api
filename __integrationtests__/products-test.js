@@ -16,7 +16,7 @@ describe("Products Namespace", function() {
                     jetConnection.Products.listProducts()
                         .then(
                             function(successObject){
-                                assert(successObject.sku_urls);
+                                assert.ok(successObject.sku_urls);
                                 done();
                             }, done
                         ).catch(done);
@@ -45,7 +45,7 @@ describe("Products Namespace", function() {
                     jetConnection.Products.createProduct(product, sku)
                         .then(
                         function(successObject){
-                            assert(successObject.sku_urls);
+                            assert.ok(successObject.sku_urls);
                             done();
                         },
                         function(error) {
@@ -58,4 +58,38 @@ describe("Products Namespace", function() {
             ).catch(done);
         });
     });
+
+    describe("Get product details", function(){
+        it("Should get product details from Jet.com", function(done) {
+            JetApi.connect(process.env.API_USER, process.env.API_SECRET)
+                .then(function(jetConnection) {
+                    jetConnection.Products.listProducts()
+                        .then(
+                        function(successObject){
+                            assert.ok(successObject.sku_urls.length,
+                                "Must have at least 1 item in products on Jet.com in order to test getDetails.");
+
+                            var testArray = successObject.sku_urls.slice(0,5); // max 5 test items
+
+                            Promise.all(testArray.map(function(d){
+                                var sku = JetApi.Helpers.getSkuFromUrl(d);
+                                return jetConnection.Products.getDetails(sku);
+                            })).then(function(values) {
+                                done();
+                            }).catch(function(d) {
+                                done("Failed!", d.statusMessage);
+                            });
+                        },
+                        function(error) {
+                            done(error.statusMessage);
+                        }
+                    ).catch(function(error) {
+                            done(error.statusMessage);
+                        });
+                }
+            ).catch(done);
+        });
+    });
+
+
 });
