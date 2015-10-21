@@ -2,11 +2,19 @@
 
 This project contains an API Client for Jet.com's API. You can include it in another project by using npm.
 
-You can include a local repository in your package.json [ like this. ][1]
+#Installation
 
-Currently, the best way to test the library is by debugging while running `npm run integration-test`
+Step 1: Install Node v4.1.2 from https://nodejs.org/en/
+
+Step 2: Install NPM if it hasn't already been installed.
+
+Step 3: Run `npm install` from the root directory of this project.
+
+P.S.: You can include a local repository in your package.json [ like this. ][1]
 
 #Integration Test Setup:
+
+Currently, the best way to test the library is by debugging while running `npm run integration-test`
 
 Create a .env file in the root directory of this project. The file has been gitignored already. The contents should be
 as follows:
