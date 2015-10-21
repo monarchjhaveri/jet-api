@@ -1,3 +1,21 @@
+#Introduction
+
+This project contains an API Client for Jet.com's API. You can include it in another project by using npm.
+
+You can include a local repository in your package.json [ like this. ][1]
+
+Currently, the best way to test the library is by debugging while running `npm run integration-test`
+
+#Integration Test Setup:
+
+Create a .env file in the root directory of this project. The file has been gitignored already. The contents should be
+as follows:
+
+    TEST_API_USER=your_api_user_key
+    TEST_API_SECRET=your_api_secret
+
+You can get the `TEST_API_USER` and `TEST_API_SECRET` values from www.partner.jet.com.
+
 #Authentication Actions
 
 ####Authenticating:
@@ -49,10 +67,4 @@ This has to be called once for each SKU that we need details for.
         });
 
 
-####Integration Test Setup:
-
-Create a .env file in the root directory. The contents should be as follows. You can get the `TEST_API_USER` and `TEST_API_SECRET`
-values from www.partner.jet.com:
-
-    TEST_API_USER=your_api_user_key
-    TEST_API_SECRET=your_api_secret
+[1]: http://stackoverflow.com/questions/14381898/local-dependency-in-package-json
