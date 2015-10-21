@@ -12,12 +12,32 @@
 
 #Product Actions
 
+####Creating a product
+    var product = {
+        "product_title": "My Product",
+        "standard_product_codes" : [
+            {
+                "standard_product_code": "123456789012",
+                "standard_product_code_type": "UPC"
+            }
+        ],
+        "multipack_quantity": 1
+    };
+
+    var sku = "fedcba9876543210";
+
+    JetConnection.Products.createProduct(product, sku).then(function(){
+        /* Will not contain any return object on success. */
+    });
+
 ####Listing product sku's:
 
     var skuList;
     JetConnection.Products.listProductSkus().then(function(theSkuList){ skuList = theSkuList; });
 
 ####Getting detailed product DTO's:
+
+This has to be called once for each SKU that we need details for.
 
         var skuList;
         var dtoList;
