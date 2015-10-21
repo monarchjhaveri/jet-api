@@ -2,11 +2,7 @@ require('dotenv').load();
 var JetConnection = require("./JetConnection");
 var ApiFacade = require("./ApiFacade");
 
-var Helpers = require('./_Helpers');
-
 var JetApi = {};
-
-JetApi.Helpers = Helpers;
 
 /**
  *

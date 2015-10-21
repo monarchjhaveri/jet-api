@@ -13,7 +13,7 @@ describe("Products Namespace", function() {
         it("Should return a list of all products currently on Jet", function(done) {
             JetApi.connect(process.env.TEST_API_USER, process.env.TEST_API_SECRET)
                 .then(function(jetConnection) {
-                    jetConnection.Products.listProducts()
+                    jetConnection.Products.listProductSkus()
                         .then(
                             function(successObject){
                                 assert.ok(successObject.sku_urls);
@@ -63,7 +63,7 @@ describe("Products Namespace", function() {
         it("Should get product details from Jet.com", function(done) {
             JetApi.connect(process.env.TEST_API_USER, process.env.TEST_API_SECRET)
                 .then(function(jetConnection) {
-                    jetConnection.Products.listProducts()
+                    jetConnection.Products.listProductSkus()
                         .then(
                         function(successObject){
                             assert.ok(successObject.sku_urls.length,

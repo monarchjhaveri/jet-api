@@ -1,3 +1,5 @@
+var SkuParserHelper = require("./helpers/SkuParserHelper");
+
 var Products = function(jetConnection){
     this.jetConnection = jetConnection;
 };
@@ -6,7 +8,7 @@ var Products = function(jetConnection){
  *
  * @returns {Promise}
  */
-Products.prototype.listProducts = function() {
+Products.prototype.listProductSkus = function() {
     var apiFacade = this.jetConnection.apiFacade;
     var token = this.jetConnection.token;
 
