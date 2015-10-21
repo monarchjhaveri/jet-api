@@ -6,7 +6,7 @@ This project contains an API Client for Jet.com's API. You can include it in ano
 
 Step 1: Install Node v4.1.2 from https://nodejs.org/en/
 
-Step 2: Install NPM if it hasn't already been installed.
+Step 2: Install NPM if it hasn't already been installed. https://www.npmjs.com/
 
 Step 3: Run `npm install` from the root directory of this project.
 
