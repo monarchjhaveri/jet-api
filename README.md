@@ -65,14 +65,15 @@ You can get the `TEST_API_USER` and `TEST_API_SECRET` values from www.partner.je
 
 This has to be called once for each SKU that we need details for.
 
-        var skuList;
-        var dtoList;
-        JetConnection.Products.listProductSkus().then(function(theSkuList){
-            skuList = theSkuList;
-            JetConnection.Products.getDetails(skuList).then(function(theDtoList) {
-                dtoList = theDtoList;
+    var dtoList = [];
+    JetConnection.Products.listProductSkus().then(function(skuList){
+        for (var i = 0; i < skuList.length; i++) {
+            var sku = skuList[i];
+            JetConnection.Products.getDetails(sku).then(function(dto) {
+                dtoList.push(dto);
             });
-        });
+        }
+    });
 
 
 [1]: http://stackoverflow.com/questions/14381898/local-dependency-in-package-json
