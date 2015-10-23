@@ -1,4 +1,3 @@
-require('dotenv').load();
 var JetConnection = require("./JetConnection");
 var ApiFacade = require("./ApiFacade");
 

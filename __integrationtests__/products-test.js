@@ -1,3 +1,4 @@
+require('dotenv').load();
 var chai = require("chai");
 var mocha = require("mocha");
 var JetApi = require("../jet-api");
