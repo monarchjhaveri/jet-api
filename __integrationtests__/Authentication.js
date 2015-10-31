@@ -11,16 +11,19 @@ describe("Connection test", function() {
     this.timeout(10000);
 
     it("Should connect successfully", function(done) {
-        JetApi.connect(process.env.TEST_API_USER, process.env.TEST_API_SECRET)
-            .then(function(jetConnection) {
-                assert(jetConnection.user === process.env.TEST_API_USER);
-                assert(jetConnection.pass === process.env.TEST_API_SECRET);
-                assert.ok(jetConnection.token);
-                assert(jetConnection.token_type === "Bearer");
-                assert.ok(jetConnection.expires_on);
-                assert.ok(jetConnection.apiFacade);
+        JetApi.authentication.connect(
+            process.env.TEST_API_USER,
+            process.env.TEST_API_SECRET,
+            function(err, data) {
+                console.log(err, data);
+                if (err) {
+                    console.log("FAILED TO LOG IN!: Data received:", err, data);
+                    done("FAILED TO LOG IN!: Above log might contain details.");
+                }
+                assert.ok(data.id_token);
+                assert(data.token_type === "Bearer");
+                assert.ok(data.expires_on);
                 done();
-            }, TestHelper.failureCallbackGenerator("Failed to connect successfully", done))
-            .catch(TestHelper.failureCallbackGenerator("Failed to connect successfully", done));
+            });
     });
 });
