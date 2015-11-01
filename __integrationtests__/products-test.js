@@ -45,10 +45,12 @@ describe("Products Namespace", function() {
 
                 JetApi.products.create(sku, product, token, function (err, data) {
                     if (err) {
-                        done(new Error("Failed to create product."));
+                        var errorMessage = "FAILED TO CREATE PRODUCT!";
+                        console.log(errorMessage, err, data)
+                        done(new Error(errorMessage));
                     }
-                    //Todo: Test stuff here.
 
+                    //Todo: Test stuff here.
                     done();
                 });
             }, done);
@@ -63,47 +65,12 @@ describe("Products Namespace", function() {
                 listProductsAndThen(token, function (err, listData) {
                     var skuUrls = listData.sku_urls;
                     assert.isTrue(skuUrls && skuUrls.length > 0);
-                    var testArray = skuUrls.slice(0,5); // max 5 test items
+                    done();
                 }, done);
             }, done);
         });
     });
 });
-//
-//    describe("Get product details", function(){
-//
-//        it("Should get product details from Jet.com", function(done) {
-//            JetApi.connect(process.env.TEST_API_USER, process.env.TEST_API_SECRET)
-//                .then(function(jetConnection) {
-//                    jetConnection.Products.listProductSkus()
-//                        .then(
-//                        function(skuArray){
-//                            assert.isTrue(skuArray && skuArray.length > 0,
-//                                "Must have at least 1 item in products on Jet.com in order to test getDetails.")
-//
-//                            var testArray = skuArray.slice(0,5); // max 5 test items
-//
-//                            Promise.all(testArray.map(function(testSku){
-//                                return jetConnection.Products.getDetails(testSku);
-//                            })).then(function(detailedDtoArray) {
-//                                for (var i = 0; i < testArray.length; i++) {
-//                                    var sku = testArray[i];
-//                                    var detailedDto = detailedDtoArray.find(function(dto) {
-//                                        return dto.merchant_sku === sku;
-//                                    });
-//                                    if (!detailedDto) {
-//                                        done(new Error("No detailed object returned for merchant_sku===" + sku));
-//                                    }
-//                                }
-//                                done();
-//                            }).catch(TestHelper.failureCallbackGenerator("Failed to get product details.", done));
-//                        },TestHelper.failureCallbackGenerator("Failed to get product details.", done)
-//                    ).catch(TestHelper.failureCallbackGenerator("Failed to get product details.", done));
-//                }
-//            ).catch(TestHelper.failureCallbackGenerator("Failed to get product details.", done));
-//        });
-//    });
-//});
 
 function listProductsAndThen(token, callback, done) {
     JetApi.products.list(token, function(err, data) {

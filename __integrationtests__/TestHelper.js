@@ -2,23 +2,6 @@ require('dotenv').load();
 var TestHelper = {};
 var JetApi = require("../jet-api");
 
-/**
- *
- * @param {!String} message
- * @returns {Function}
- */
-TestHelper.failureCallbackGenerator = function (message, done) {
-    return function(values) {
-        if (values instanceof Error) {
-            console.log(message);
-            done(values);
-        } else {
-            console.log(values);
-            done(new Error(message, values));
-        }
-    }
-};
-
 TestHelper.generateRandomString = function(length) {
     var allowedChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var result = '';

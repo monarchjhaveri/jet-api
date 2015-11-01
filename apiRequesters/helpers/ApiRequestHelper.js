@@ -36,17 +36,16 @@ ApiRequestHelper.request = function(payload, _options, callback) {
         });
 
         httpResponse.on("end", function() {
-            var parsedData;
-            try {
-                parsedData = JSON.parse(data);
-            } catch (e) {
-                // The api should always send back JSON data.
-                callback(e);
-            }
-
             if (httpResponse.statusCode < 200 || httpResponse.statusCode > 299) {
                 callback(new Error("Received response with status code " + httpResponse.statusCode));
             } else {
+                var parsedData;
+                try {
+                    parsedData = JSON.parse(data);
+                } catch (e) {
+                    // The api should always send back JSON data.
+                    parsedData = data;
+                }
                 callback(null, parsedData);
             }
         })

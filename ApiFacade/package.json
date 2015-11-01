@@ -1,6 +1,0 @@
-{
-  "name": "api-facade",
-  "version": "0.0.1",
-  "main": "./ApiFacade.js",
-  "private": true
-}

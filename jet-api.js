@@ -6,6 +6,4 @@ var JetApi = {};
 JetApi.authentication = authenticationRequester;
 JetApi.products = productsRequester;
 
-
-
 module.exports = JetApi;
