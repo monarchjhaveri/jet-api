@@ -6,13 +6,11 @@
     "test": "jest",
     "integration-test": "mocha __integrationtests__"
   },
-  "dependencies": {
-    "dotenv": "^1.2.0"
-  },
   "devDependencies": {
     "chai": "^3.3.0",
     "jest-cli": "^0.5.10",
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "dotenv": "^1.2.0"
   },
   "engines" : { "node" : "4.1.2" }
 }

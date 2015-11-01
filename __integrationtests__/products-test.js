@@ -2,14 +2,13 @@ require('dotenv').load();
 var chai = require("chai");
 var mocha = require("mocha");
 var JetApi = require("../jet-api");
-var JetConnection = require("../JetConnection");
 var TestHelper = require("./TestHelper");
 
 var expect = chai.expect;
 var assert = chai.assert;
 
 describe("Products Namespace", function() {
-    this.timeout(10000);
+    this.timeout(25000);
 
     describe("List Products", function () {
         it("Should return a list of all products currently on Jet", function (done) {
@@ -58,7 +57,7 @@ describe("Products Namespace", function() {
     });
 
     describe("Get product details", function () {
-        this.timeout(15000);
+        this.timeout(25000);
         it("Should get product details from Jet.com", function (done) {
             TestHelper.doLoginAndThen(function (err, loginData) {
                 var token = loginData.id_token;

@@ -2,7 +2,6 @@ require('dotenv').load();
 var chai = require("chai");
 var mocha = require("mocha");
 var JetApi = require("../jet-api");
-var JetConnection = require("../JetConnection");
 var TestHelper = require("./TestHelper");
 
 var expect = chai.expect;
