@@ -12,5 +12,10 @@
     "mocha": "^2.3.3",
     "dotenv": "^1.2.0"
   },
-  "engines" : { "node" : "4.1.2" }
+  "engines": {
+    "node": "4.1.2"
+  },
+  "dependencies": {
+    "http-status": "^0.2.0"
+  }
 }

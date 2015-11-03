@@ -30,7 +30,6 @@ productsRequester.create = function(sku, product, token, callback) {
 
     var payload = JSON.stringify(product);
 
-
     ApiRequestHelper.request(payload, options, callback);
 };
 

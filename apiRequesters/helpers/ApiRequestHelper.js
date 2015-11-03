@@ -2,6 +2,7 @@ var https = require("https");
 
 var ApiRequestHelper = {};
 var Constants = require("../Constants");
+var RemoteError = require("../errors/RemoteError");
 
 /**
  *
@@ -37,7 +38,7 @@ ApiRequestHelper.request = function(payload, _options, callback) {
 
         httpResponse.on("end", function() {
             if (httpResponse.statusCode < 200 || httpResponse.statusCode > 299) {
-                callback(new Error("Received response with status code " + httpResponse.statusCode));
+                callback(new RemoteError(httpResponse.statusCode, httpResponse));
             } else {
                 var parsedData;
                 try {
