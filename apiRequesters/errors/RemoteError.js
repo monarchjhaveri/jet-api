@@ -9,7 +9,7 @@ var HTTPStatus = require ("http-status");
 module.exports = function RemoteError(statusCode, httpResponse) {
     Error.captureStackTrace(this, this.constructor);
     this.name = this.constructor.name;
-    this.message = HTTPStatus[statusCode];
+    this.message = "[" + statusCode + "] " + HTTPStatus[statusCode];
     this.statusCode = statusCode;
     this.httpResponse = httpResponse;
 };
