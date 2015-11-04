@@ -13,6 +13,7 @@ var RemoteError = require("../errors/RemoteError");
 ApiRequestHelper.request = function(payload, _options, callback) {
     if (!_options.path) {
         callback(new Error('No path set in options.'))
+        return;
     }
 
     var options = {
@@ -37,16 +38,18 @@ ApiRequestHelper.request = function(payload, _options, callback) {
         });
 
         httpResponse.on("end", function() {
+            var parsedData;
+            try {
+                parsedData = JSON.parse(data);
+            } catch (e) {
+                // The api should always send back JSON data.
+                parsedData = data;
+            }
+
             if (httpResponse.statusCode < 200 || httpResponse.statusCode > 299) {
-                callback(new RemoteError(httpResponse.statusCode, httpResponse));
+                console.error(parsedData);
+                callback(new RemoteError(httpResponse.statusCode, httpResponse, data));
             } else {
-                var parsedData;
-                try {
-                    parsedData = JSON.parse(data);
-                } catch (e) {
-                    // The api should always send back JSON data.
-                    parsedData = data;
-                }
                 callback(null, parsedData);
             }
         })
