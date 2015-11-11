@@ -5,7 +5,10 @@ module.exports = {
         PRODUCT: {
             LIST: "/api/merchant-skus",
             CREATE: "/api/merchant-skus/{id}",
-            GET_DETAILS: "/api/merchant-skus/{id}"
+            GET_DETAILS: "/api/merchant-skus/{id}",
+            INVENTORY: {
+                GET_INVENTORY: "/api/merchant-skus/{id}/inventory"
+            }
         },
         ORDER: {
             LIST_BY_STATUS: "/api/orders/{status}",
@@ -15,7 +18,11 @@ module.exports = {
             LIST_NODES: "/api/taxonomy/links/{version}?offset={offset}&limit={limit}",
             GET_NODE: "/api/taxonomy/nodes/{id}",
             GET_NODE_ATTRIBUTES: "/api/taxonomy/nodes/{id}/attributes"
+        },
+        MERCHANT: {
+            FULFILLMENT_NODES: "/api/fulfillmentnodesbymerchantid"
         }
+
     },
     ORDER_STATUS: {
         COMPLETE: "complete",

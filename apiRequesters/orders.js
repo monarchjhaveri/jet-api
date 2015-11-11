@@ -3,7 +3,7 @@ var ApiRequestHelper = require("./helpers/ApiRequestHelper");
 
 var ordersRequester = {};
 
-ApiRequestHelper.listByStatus = function(status, token, callback) {
+ordersRequester.listByStatus = function(status, token, callback) {
     if (!status) {
         callback(new Error("status must be present"));
     } else if (!token) {
@@ -19,23 +19,23 @@ ApiRequestHelper.listByStatus = function(status, token, callback) {
 };
 
 ordersRequester.listAcknowledged = function(token, callback) {
-    ApiRequestHelper.listByStatus(Constants.ORDER_STATUS.ACKNOWLEDGED, token, callback);
+    ordersRequester.listByStatus(Constants.ORDER_STATUS.ACKNOWLEDGED, token, callback);
 };
 
 ordersRequester.listComplete = function(token, callback) {
-    ApiRequestHelper.listByStatus(Constants.ORDER_STATUS.COMPLETE, token, callback);
+    ordersRequester.listByStatus(Constants.ORDER_STATUS.COMPLETE, token, callback);
 };
 
 ordersRequester.listCreated = function(token, callback) {
-    ApiRequestHelper.listByStatus(Constants.ORDER_STATUS.CREATED, token, callback);
+    ordersRequester.listByStatus(Constants.ORDER_STATUS.CREATED, token, callback);
 };
 
 ordersRequester.listInProgress = function(token, callback) {
-    ApiRequestHelper.listByStatus(Constants.ORDER_STATUS.IN_PROGRESS, token, callback);
+    ordersRequester.listByStatus(Constants.ORDER_STATUS.IN_PROGRESS, token, callback);
 };
 
 ordersRequester.listReady = function(token, callback) {
-    ApiRequestHelper.listByStatus(Constants.ORDER_STATUS.READY, token, callback);
+    ordersRequester.listByStatus(Constants.ORDER_STATUS.READY, token, callback);
 };
 
 /**
