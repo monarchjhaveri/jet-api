@@ -14,7 +14,7 @@ productsInventoryRequester.list = function(sku, token, callback) {
         callback(new Error("sku and token must all be present"));
     } else {
         var options = {
-            path: Constants.URL.PRODUCT.INVENTORY.GET_DETAILS.replace("{id}", sku),
+            path: Constants.URL.PRODUCT.INVENTORY.replace("{id}", sku),
             method: 'GET',
             token: token
         };
@@ -28,7 +28,7 @@ productsInventoryRequester.update = function(sku, product, token, callback) {
         callback(new Error("sku, product and token must all be present"));
     } else {
         var options = {
-            path: Constants.URL.PRODUCT.INVENTORY.GET_DETAILS.replace("{id}", sku),
+            path: Constants.URL.PRODUCT.INVENTORY.replace("{id}", sku),
             method: 'PUT',
             token: token
         };
