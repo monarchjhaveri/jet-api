@@ -6,7 +6,8 @@ module.exports = {
             LIST: "/api/merchant-skus",
             CREATE: "/api/merchant-skus/{id}",
             GET_DETAILS: "/api/merchant-skus/{id}",
-            INVENTORY: "/api/merchant-skus/{id}/inventory"
+            INVENTORY: "/api/merchant-skus/{id}/inventory",
+            PRICE: "/api/merchant-skus/{id}/price"
         },
         ORDER: {
             LIST_BY_STATUS: "/api/orders/{status}",
