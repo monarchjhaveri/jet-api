@@ -1,11 +1,7 @@
-var authenticationRequester = require("./apiRequesters/authenticationRequester");
-var productsRequester = require("./apiRequesters/productsRequester");
-var RemoteError = require ("./apiRequesters/errors/RemoteError");
-
-
 var JetApi = {};
 
-JetApi.authentication = authenticationRequester;
-JetApi.products = productsRequester;
+JetApi.authentication = require("./apiRequesters/authentication");
+JetApi.products = require("./apiRequesters/products");
+JetApi.orders = require("./apiRequesters/orders");
 
 module.exports = JetApi;

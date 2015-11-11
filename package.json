@@ -1,6 +1,6 @@
 {
   "name": "jet-api",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "./jet-api.js",
   "scripts": {
     "test": "jest",
