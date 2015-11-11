@@ -23,9 +23,9 @@ productsInventoryRequester.list = function(sku, token, callback) {
     }
 };
 
-productsInventoryRequester.update = function(sku, product, token, callback) {
-    if (!sku || !product || !token) {
-        callback(new Error("sku, product and token must all be present"));
+productsInventoryRequester.update = function(sku, fulfillmentNodesDto, token, callback) {
+    if (!sku || !fulfillmentNodesDto || !token) {
+        callback(new Error("sku, fulfillmentNodesDto and token must all be present"));
     } else {
         var options = {
             path: Constants.URL.PRODUCT.INVENTORY.replace("{id}", sku),
@@ -33,7 +33,7 @@ productsInventoryRequester.update = function(sku, product, token, callback) {
             token: token
         };
 
-        var payload = JSON.stringify(product);
+        var payload = JSON.stringify(fulfillmentNodesDto);
 
         ApiRequestHelper.request(payload, options, callback);
     }
