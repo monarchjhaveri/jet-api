@@ -58,6 +58,38 @@ ordersRequester.getDetails = function(merchant_order_id, token, callback) {
     }
 };
 
+ordersRequester.acknowledge = function(merchant_order_id, acknowledge_dto, token, callback) {
+    if (!merchant_order_id || !acknowledge_dto || !token) {
+        callback(new Error("Merchant order ID, acknowledgement DTO and token must all be present"));
+    } else {
+        var options = {
+            path: Constants.URL.ORDER.ACKNOWLEDGE.replace("{id}", merchant_order_id),
+            method: 'PUT',
+            token: token
+        };
+
+        var payload = JSON.stringify(acknowledge_dto);
+
+        ApiRequestHelper.request(payload, options, callback);
+    }
+};
+
+ordersRequester.shipped = function(merchant_order_id, shipped_dto, token, callback) {
+    if (!merchant_order_id || !shipped_dto || !token) {
+        callback(new Error("Merchant order ID, Shipped DTO and token must all be present"));
+    } else {
+        var options = {
+            path: Constants.URL.ORDER.SHIPPED.replace("{id}", merchant_order_id),
+            method: 'PUT',
+            token: token
+        };
+
+        var payload = JSON.stringify(shipped_dto);
+
+        ApiRequestHelper.request(payload, options, callback);
+    }
+};
+
 ordersRequester.ORDER_STATUS = Constants.ORDER_STATUS;
 
 module.exports = ordersRequester;

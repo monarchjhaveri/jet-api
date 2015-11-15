@@ -11,7 +11,9 @@ module.exports = {
         },
         ORDER: {
             LIST_BY_STATUS: "/api/orders/{status}",
-            GET_DETAILS: "/api/orders/withoutShipmentDetail/{id}"
+            GET_DETAILS: "/api/orders/withoutShipmentDetail/{id}",
+            ACKNOWLEDGE: "/api/orders/{id}/acknowledge",
+            SHIPPED: "/api/orders/{id}/shipped"
         },
         TAXONOMY: {
             LIST_NODES: "/api/taxonomy/links/{version}?offset={offset}&limit={limit}",
