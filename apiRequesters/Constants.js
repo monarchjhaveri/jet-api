@@ -30,6 +30,7 @@ module.exports = {
         IN_PROGRESS: "inprogress",
         ACKNOWLEDGED: "acknowledged",
         READY: "ready",
-        CREATED: "created"
+        CREATED: "created",
+        DIRECTED_CANCEL: "directedCancel"
     }
 };
