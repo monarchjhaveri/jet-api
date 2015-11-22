@@ -24,7 +24,7 @@ module.exports = {
             FULFILLMENT_NODES: "/api/fulfillmentnodesbymerchantid"
         },
         RETURN: {
-            LIST:   "/api/returns/{status}",
+            LIST_BY_STATUS: "/api/returns/{status}",
             GET_DETAILS: "/api/returns/state/{id}",
             COMPLETE: "/api/returns/{id}/complete"
         }

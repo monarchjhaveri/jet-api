@@ -3,12 +3,14 @@ var ApiRequestHelper = require("./helpers/ApiRequestHelper");
 
 var returnsRequester = {};
 
-returnsRequester.list = function(token, callback) {
-    if (!token) {
+returnsRequester.listByStatus = function(status, token, callback) {
+    if (!status) {
+        callback(new Error("status must be present"));
+    } else if (!token) {
         callback(new Error("token must be present"));
     } else {
         var options = {
-            path: Constants.URL.RETURN.LIST,
+            path: Constants.URL.RETURN.LIST_BY_STATUS.replace("{status}", status),
             method: 'GET',
             token: token
         };
