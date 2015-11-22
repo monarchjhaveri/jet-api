@@ -22,8 +22,12 @@ module.exports = {
         },
         MERCHANT: {
             FULFILLMENT_NODES: "/api/fulfillmentnodesbymerchantid"
+        },
+        RETURN: {
+            LIST:   "/api/returns/{status}",
+            GET_DETAILS: "/api/returns/state/{id}",
+            COMPLETE: "/api/returns/{id}/complete"
         }
-
     },
     ORDER_STATUS: {
         COMPLETE: "complete",
