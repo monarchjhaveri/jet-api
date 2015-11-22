@@ -36,5 +36,12 @@ module.exports = {
         READY: "ready",
         CREATED: "created",
         DIRECTED_CANCEL: "directedCancel"
+    },
+    RETURN_STATUS: {
+        JET_REFUNDED: "jet refunded",
+        COMPLETED_BY_MERCHANT: "completed by merchant",
+        REFUND_CUSTOMER_WITHOUT_RETURN: "refund customer without return",
+        ACKNOWLEDGED: "acknowledged",
+        CREATED: "created"
     }
 };

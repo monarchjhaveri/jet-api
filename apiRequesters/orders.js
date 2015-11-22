@@ -91,5 +91,4 @@ ordersRequester.shipped = function(merchant_order_id, shipped_dto, token, callba
 };
 
 ordersRequester.ORDER_STATUS = Constants.ORDER_STATUS;
-
 module.exports = ordersRequester;

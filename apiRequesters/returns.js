@@ -46,6 +46,6 @@ returnsRequester.complete = function(returnId, product, token, callback) {
     }
 };
 
+returnsRequester.RETURN_STATUS = Constants.RETURN_STATUS;
 module.exports = returnsRequester;
-module.exports.inventory = productsInventoryRequester;
-module.exports.price = productsPriceRequester;
+
