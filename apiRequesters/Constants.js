@@ -38,9 +38,9 @@ module.exports = {
         DIRECTED_CANCEL: "directedCancel"
     },
     RETURN_STATUS: {
-        JET_REFUNDED: "jet refunded",
-        COMPLETED_BY_MERCHANT: "completed by merchant",
-        REFUND_CUSTOMER_WITHOUT_RETURN: "refund customer without return",
+        JET_REFUNDED: "jetRefunded",
+        COMPLETED_BY_MERCHANT: "completedByMerchant",
+        REFUND_CUSTOMER_WITHOUT_RETURN: "refundCustomerWithoutReturn",
         ACKNOWLEDGED: "acknowledged",
         CREATED: "created"
     }
