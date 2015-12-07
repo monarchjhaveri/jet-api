@@ -27,6 +27,11 @@ module.exports = {
             LIST_BY_STATUS: "/api/returns/{status}",
             GET_DETAILS: "/api/returns/state/{id}",
             COMPLETE: "/api/returns/{id}/complete"
+        },
+        REFUND: {
+            LIST_BY_STATUS: "/api/refunds/{status}",
+            GET_DETAILS: "/api/refunds/state/{id}",
+            POST_REFUND: "/api/refunds/{order_id}/{refund_id}"
         }
     },
     ORDER_STATUS: {
@@ -42,6 +47,13 @@ module.exports = {
         COMPLETED_BY_MERCHANT: "completedByMerchant",
         REFUND_CUSTOMER_WITHOUT_RETURN: "refundCustomerWithoutReturn",
         ACKNOWLEDGED: "acknowledged",
+        CREATED: "created"
+    },
+    REFUND_STATUS: {
+        REJECTED_CUSTOMER_CARD_INVALID: "rejected - customer card not valid",
+        REJECTED_CONFLICTS_WITH_RETURN_POLICY: "rejected - refund conflicts with returns policy",
+        ACCEPTED: "accepted",
+        PROCESSING: "processing",
         CREATED: "created"
     }
 };
