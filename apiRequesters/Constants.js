@@ -31,7 +31,7 @@ module.exports = {
         REFUND: {
             LIST_BY_STATUS: "/api/refunds/{status}",
             GET_DETAILS: "/api/refunds/state/{id}",
-            POST_REFUND: "/api/refunds/{order_id}/{refund_id}"
+            POST_REFUND: "/api/refunds/{order_id}/{alt_refund_id}"
         }
     },
     ORDER_STATUS: {

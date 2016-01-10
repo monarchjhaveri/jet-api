@@ -32,19 +32,19 @@ refundsRequester.getDetails = function(refundId, token, callback) {
     }
 };
 
-refundsRequester.post = function(orderId, refundId, product, token, callback) {
-    if (!orderId || !refundId || !product || !token) {
-        callback(new Error("orderId, refundId, product and token must all be present"));
+refundsRequester.post = function(orderId, altRefundId, refundDto, token, callback) {
+    if (!orderId || !altRefundId || !refundDto || !token) {
+        callback(new Error("orderId, altRefundId, refundDto and token must be present"));
     } else {
         var options = {
             path: Constants.URL.REFUND.POST_REFUND
                 .replace("{order_id}", orderId)
-                .replace("{refund_id}", refundId),
-            method: 'PUT',
+                .replace("{alt_refund_id}", altRefundId),
+            method: 'POST',
             token: token
         };
 
-        var payload = JSON.stringify(product);
+        var payload = JSON.stringify(refundDto);
 
         ApiRequestHelper.request(payload, options, callback);
     }
