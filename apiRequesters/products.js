@@ -2,6 +2,7 @@ var Constants = require("./Constants");
 var ApiRequestHelper = require("./helpers/ApiRequestHelper");
 var productsInventoryRequester = require("./products_inventory");
 var productsPriceRequester = require("./products_price");
+var productsVariationRequester = require("./products_variation");
 
 var productsRequester = {};
 
@@ -51,3 +52,4 @@ productsRequester.getDetails = function(sku, token, callback) {
 module.exports = productsRequester;
 module.exports.inventory = productsInventoryRequester;
 module.exports.price = productsPriceRequester;
+module.exports.variation = productsVariationRequester;
