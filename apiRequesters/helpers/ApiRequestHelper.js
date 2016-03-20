@@ -28,6 +28,10 @@ ApiRequestHelper.request = function(payload, _options, callback) {
         }
     };
 
+    if (_options.headersOverride) {
+        options.headers = _options.headersOverride;
+    }
+
     var httpRequest = https.request(options, function(httpResponse) {
         var data = "";
 

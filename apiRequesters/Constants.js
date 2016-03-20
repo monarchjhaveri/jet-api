@@ -33,6 +33,11 @@ module.exports = {
             LIST_BY_STATUS: "/api/refunds/{status}",
             GET_DETAILS: "/api/refunds/state/{id}",
             POST_REFUND: "/api/refunds/{order_id}/{alt_refund_id}"
+        },
+        FILE_UPLOAD: {
+            GET_UPLOAD_TOKEN: "/api/files/uploadToken",
+            FILES_UPLOADED: "/api/files/uploaded",
+            FILE_UPLOAD_STATUS: "/api/files/{id}"
         }
     },
     ORDER_STATUS: {
