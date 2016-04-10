@@ -4,68 +4,10 @@ var request = require('request');
 
 var fileUploadRequester = {};
 
-/**
- *
- * @param token
- * @param filename
- * @param filetype
- * @param gzippedFile
- * @param callback
- */
-fileUploadRequester.uploadFile = function(token, filename, filetype, gzippedFile, callback) {
-    if (!token || !filename || !gzippedFile) {
-        callback(new Error("token, filename and gzippedFile must be present"));
-    }
-    else {
-        getFileUploadToken(token, function(err, data) {
-            if (err) {
-                callback(err)
-            }
-            else {
-                // // upload the file and return the jet file id
-                //var jetFileId = data.jet_file_id;
-                //
-                //var options = {
-                //    path: data.url,
-                //    method: 'PUT',
-                //    headersOverride: {
-                //        "x-ms-blob-type": "blockblob"
-                //    }
-                //};
-                //
-                //ApiRequestHelper.request(null, options, function(err, data) {
-                //    if (err) {
-                //        callback(err);
-                //    }
-                //    else {
-                //        var objectWithoutExpiry = {
-                //            url: data.url,
-                //            jet_file_id: data.jet_file_id
-                //        };
-                //
-                //        callback(null, objectWithoutExpiry);
-                //    }
-                //});
+fileUploadRequester.getFileUploadToken = getFileUploadToken;
+fileUploadRequester.uploadFile = uploadFile;
+fileUploadRequester.notifyJet = notifyJet;
 
-                // use a direct library here since we don't need auth to upload
-
-                var tokenObject = {
-                    url: data.url,
-                    jet_file_id: data.jet_file_id
-                };
-
-                uploadFile(filename, gzippedFile, data.url, function(err, data) {
-                    if (err) {
-                        callback(err);
-                    }
-                    else {
-                        notifyJet(token, filename, filetype, tokenObject.url, callback);
-                    }
-                });
-            }
-        });
-    }
-};
 
 function getFileUploadToken(token, callback) {
     if (!token) {
@@ -81,6 +23,13 @@ function getFileUploadToken(token, callback) {
     }
 }
 
+/**
+ * No need for token here
+ * @param filename
+ * @param fileData
+ * @param url
+ * @param callback
+ */
 function uploadFile(filename, fileData, url, callback) {
     if (!filename || !fileData || !url) {
         callback(new Error("filename, fileData and url must be present"));
@@ -89,7 +38,8 @@ function uploadFile(filename, fileData, url, callback) {
             url: url,
             method: 'PUT',
             headers: {
-                "x-ms-blob-type": "blockblob"
+                "x-ms-blob-type": "blockblob",
+                "Content-Length": (fileData && fileData.length) ? fileData.length : 0
             }
         };
         var req = request(options, callback);
@@ -100,17 +50,26 @@ function uploadFile(filename, fileData, url, callback) {
     }
 }
 
-function notifyJet(token, filename, filetype, url, callback) {
-    if (!token || !filename || !filetype || !url) {
-        callback(new Error("token, filename, filetype and url must be present"));
+/**
+ *
+ * @param token
+ * @param filename
+ * @param filetype
+ * @param uploadToken
+ * @param callback
+ */
+function notifyJet(token, filename, filetype, uploadToken, callback) {
+    if (!token || !filename || !filetype || !uploadToken) {
+        callback(new Error("token, filename, filetype and uploadToken must be present"));
     } else {
+
         var options = {
             path: Constants.URL.FILE_UPLOAD.FILES_UPLOADED,
             method: 'POST',
             token: token
         };
         var payload = JSON.stringify({
-            url: url,
+            url: uploadToken.url,
             file_type: filetype,
             file_name: filename
         });
