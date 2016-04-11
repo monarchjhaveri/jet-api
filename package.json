@@ -1,6 +1,6 @@
 {
   "name": "jet-api",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "main": "./jet-api.js",
   "scripts": {
     "test": "jest",
@@ -16,6 +16,7 @@
     "node": "4.1.2"
   },
   "dependencies": {
-    "http-status": "^0.2.0"
+    "http-status": "^0.2.0",
+    "unirest": "^0.4.2"
   }
 }

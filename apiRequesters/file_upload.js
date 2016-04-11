@@ -1,12 +1,13 @@
 var Constants = require("./Constants");
 var ApiRequestHelper = require("./helpers/ApiRequestHelper");
-var request = require('request');
+var unirest = require('unirest');
 
 var fileUploadRequester = {};
 
 fileUploadRequester.getFileUploadToken = getFileUploadToken;
 fileUploadRequester.uploadFile = uploadFile;
 fileUploadRequester.notifyJet = notifyJet;
+fileUploadRequester.status = status;
 
 
 function getFileUploadToken(token, callback) {
@@ -34,18 +35,16 @@ function uploadFile(filename, fileData, url, callback) {
     if (!filename || !fileData || !url) {
         callback(new Error("filename, fileData and url must be present"));
     } else {
-        var options = {
-            url: url,
-            method: 'PUT',
-            headers: {
-                "x-ms-blob-type": "blockblob",
-                "Content-Length": (fileData && fileData.length) ? fileData.length : 0
+        var unirestRequest = unirest.put(url);
+        unirestRequest.headers({"x-ms-blob-type": "BlockBlob", "Accept": "application/json"});
+        unirestRequest.send(fileData); // Attachment
+        unirestRequest.end(function (response) {
+            if (response.ok) {
+              callback(null, response)
             }
-        };
-        var req = request(options, callback);
-        var form = req.form();
-        form.append('file', fileData, {
-            filename: filename
+            else {
+              callback(response);
+            }
         });
     }
 }
@@ -75,6 +74,26 @@ function notifyJet(token, filename, filetype, uploadToken, callback) {
         });
 
         ApiRequestHelper.request(payload, options, callback);
+    }
+}
+
+/**
+ *
+ * @param token
+ * @param jetFileId
+ * @param callback
+ */
+function status(token, jetFileId, callback) {
+    if (!token || !jetFileId) {
+        callback(new Error("token, jetFileId must be present"));
+    }
+    else {
+        var options = {
+            path: Constants.URL.FILE_UPLOAD.FILE_UPLOAD_STATUS.replace("{id}", jetFileId),
+            method: 'GET',
+            token: token
+        };
+        ApiRequestHelper.request(null, options, callback);
     }
 }
 
